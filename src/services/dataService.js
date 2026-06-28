@@ -3,6 +3,8 @@ import data from '../data/centros.json'
 // Capa de datos — hoy lee del JSON local.
 // Para conectar Supabase (Fase 2): reemplazar solo este archivo.
 
+export const getMostrarNecesidades = () => data._meta?.mostrar_necesidades ?? false
+
 export const getCategorias = () => Promise.resolve(data.categorias)
 
 export const getCentros = () => Promise.resolve(data.centros)

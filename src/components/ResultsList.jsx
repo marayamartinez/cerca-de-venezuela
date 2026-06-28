@@ -1,7 +1,7 @@
 import CentroCard from './CentroCard'
 import { Search } from 'lucide-react'
 
-export default function ResultsList({ centros, categorias, ciudad }) {
+export default function ResultsList({ centros, categorias, ciudad, mostrarNecesidades }) {
   if (!ciudad) {
     return (
       <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
@@ -38,7 +38,7 @@ export default function ResultsList({ centros, categorias, ciudad }) {
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {ordenados.map((centro) => (
-          <CentroCard key={centro.id} centro={centro} categorias={categorias} />
+          <CentroCard key={centro.id} centro={centro} categorias={categorias} mostrarNecesidades={mostrarNecesidades} />
         ))}
       </div>
     </div>

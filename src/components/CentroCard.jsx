@@ -35,12 +35,14 @@ function NecesidadPill({ estado, label }) {
   )
 }
 
-export default function CentroCard({ centro, categorias }) {
+export default function CentroCard({ centro, categorias, mostrarNecesidades }) {
   const estaAbierto = centro.abierto
 
-  const urlMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${centro.direccion}, ${centro.ciudad}, Ecuador`
-  )}`
+  const urlMaps = centro.maps_url
+    ? centro.maps_url
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        `${centro.direccion}, ${centro.ciudad}, Ecuador`
+      )}`
 
   const getEstado = (catId) => centro.necesidades?.[catId] || 'necesita'
 
@@ -51,7 +53,7 @@ export default function CentroCard({ centro, categorias }) {
       }`}
     >
       {/* Cabecera de tarjeta */}
-      <div className="p-5 pb-4 border-b border-[#E6EEF6]">
+      <div className={`p-5 pb-4 ${mostrarNecesidades ? 'border-b border-[#E6EEF6]' : ''}`}>
         <div className="flex items-start justify-between gap-3 mb-3">
           <h2
             className="text-[#0B335E] font-semibold text-base leading-tight"
@@ -59,7 +61,6 @@ export default function CentroCard({ centro, categorias }) {
           >
             {centro.local}
           </h2>
-          {/* Badge abierto/cerrado */}
           {estaAbierto ? (
             <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#DEF5EB] text-[#0F9D63]">
               <span className="w-2 h-2 rounded-full bg-[#13B473] inline-block" />
@@ -73,37 +74,37 @@ export default function CentroCard({ centro, categorias }) {
           )}
         </div>
 
-        {/* Dirección */}
         <div className="flex items-start gap-2 text-[#5A6B85] text-sm mb-2">
           <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-[#2E8BE0]" />
           <span>{centro.direccion}</span>
         </div>
 
-        {/* Horario */}
         <div className="flex items-center gap-2 text-[#5A6B85] text-sm">
           <Clock className="w-4 h-4 shrink-0 text-[#2E8BE0]" />
           <span>{centro.horario}</span>
         </div>
       </div>
 
-      {/* Necesidades */}
-      <div className="p-5 flex-1">
-        <p className="text-[#5A6B85] text-xs font-semibold uppercase tracking-wide mb-3">
-          Qué necesita ahora
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {categorias.map((cat) => (
-            <NecesidadPill
-              key={cat.id}
-              estado={getEstado(cat.id)}
-              label={cat.label}
-            />
-          ))}
+      {/* Necesidades — solo si mostrarNecesidades es true */}
+      {mostrarNecesidades && (
+        <div className="p-5 flex-1">
+          <p className="text-[#5A6B85] text-xs font-semibold uppercase tracking-wide mb-3">
+            Qué necesita ahora
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {categorias.map((cat) => (
+              <NecesidadPill
+                key={cat.id}
+                estado={getEstado(cat.id)}
+                label={cat.label}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Footer */}
-      <div className="px-5 pb-5">
+      <div className="px-5 pb-5 mt-auto pt-4">
         <a
           href={urlMaps}
           target="_blank"

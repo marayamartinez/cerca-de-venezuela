@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import SearchSection from './components/SearchSection'
 import ResultsList from './components/ResultsList'
-import { getCentrosPorCiudad, getCategorias, getCiudades } from './services/dataService'
+import DonationGuide from './components/DonationGuide'
+import { getCentrosPorCiudad, getCategorias, getCiudades, getMostrarNecesidades } from './services/dataService'
 import './index.css'
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
   const [ciudades, setCiudades] = useState([])
   const [centros, setCentros] = useState([])
   const [categorias, setCategorias] = useState([])
+  const mostrarNecesidades = getMostrarNecesidades()
 
   useEffect(() => {
     getCiudades().then(setCiudades)
@@ -33,10 +35,14 @@ export default function App() {
           ciudadSeleccionada={ciudadSeleccionada}
           onCiudadChange={setCiudadSeleccionada}
         />
+        <div className="py-4">
+          <DonationGuide />
+        </div>
         <ResultsList
           centros={centros}
           categorias={categorias}
           ciudad={ciudadSeleccionada}
+          mostrarNecesidades={mostrarNecesidades}
         />
       </main>
 

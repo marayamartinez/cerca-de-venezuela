@@ -1,35 +1,330 @@
 {
-  "_comment": "Base de datos inicial de centros de acopio - Operación Todos con Vzla Ecuador. Cada centro tiene un estado de necesidades por categoría: 'urgente', 'necesita', 'no_necesita'. Los administradores pueden editar esto, marcar abierto/cerrado, y agregar nuevos centros.",
+  "_meta": {
+    "nombre": "Cerca de Venezuela",
+    "mostrar_necesidades": false,
+    "nota": "Cuando se apruebe el sistema de necesidades, cambiar mostrar_necesidades a true y llenar 'necesidades' de cada centro.",
+    "estados_necesidad": {
+      "urgente": "Se necesita con prioridad (resalta en rojo)",
+      "necesita": "Se necesita (estado normal)",
+      "no_necesita": "Ya no se necesita / saturado (tachado en gris)"
+    },
+    "ejemplo_necesidades": {
+      "_comentario": "Cuando mostrar_necesidades sea true, cada centro llenará su campo 'necesidades' así, usando los id de categorias. Las categorias no listadas se asumen como 'necesita'.",
+      "alimentos": "urgente",
+      "ropa": "no_necesita",
+      "medicos": "urgente"
+    }
+  },
   "categorias": [
-    { "id": "alimentos", "label": "Alimentos no perecederos", "icono": "lata" },
-    { "id": "formula", "label": "Fórmula para bebés", "icono": "biberon" },
-    { "id": "panales", "label": "Pañales (niños y adultos)", "icono": "panal" },
-    { "id": "higiene", "label": "Higiene personal", "icono": "higiene" },
-    { "id": "agua", "label": "Agua embotellada", "icono": "agua" },
-    { "id": "medicos", "label": "Insumos médicos", "icono": "medico" },
-    { "id": "mascotas", "label": "Alimento para mascotas", "icono": "mascota" },
-    { "id": "ropa", "label": "Ropa", "icono": "ropa" }
+    {
+      "id": "alimentos",
+      "label": "Alimentos no perecederos"
+    },
+    {
+      "id": "agua",
+      "label": "Agua y sueros"
+    },
+    {
+      "id": "higiene",
+      "label": "Higiene personal"
+    },
+    {
+      "id": "medicos",
+      "label": "Primeros auxilios / medicinas"
+    },
+    {
+      "id": "rescate",
+      "label": "Materiales para rescatistas"
+    },
+    {
+      "id": "formula",
+      "label": "Fórmula y compotas para niños"
+    },
+    {
+      "id": "panales",
+      "label": "Pañales (niños y adultos)"
+    },
+    {
+      "id": "ropa",
+      "label": "Ropa"
+    }
   ],
   "centros": [
-    { "id": 1, "ciudad": "Babahoyo", "provincia": "Los Ríos", "local": "Restaurant Sazón Yaritagüeños", "direccion": "Calles Custodio Sánchez y Barreiro", "horario": "7:00 AM a 5:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 2, "ciudad": "Babahoyo", "provincia": "Los Ríos", "local": "Ciudadela El Chofer", "direccion": "Calle principal entre depósito de Dimispro y Spa Voluntad de Dios", "horario": "8:00 AM a 6:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 3, "ciudad": "Ambato", "provincia": "Tungurahua", "local": "Pizza House", "direccion": "Av. Shyris y Rumiñahui", "horario": "9:00 AM a 10:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 4, "ciudad": "Ambato", "provincia": "Tungurahua", "local": "TuFastMarket", "direccion": "Av. 12 de Noviembre, Redondel de la Cumandá", "horario": "8:00 AM a 8:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 5, "ciudad": "Quito", "provincia": "Pichincha", "local": "Barber Studio WB", "direccion": "Shyris y Gaspar de Villarroel", "horario": "8:00 AM a 8:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 6, "ciudad": "Quito", "provincia": "Pichincha", "local": "Local frente al Colegio Montúfar", "direccion": "Avenida Napo casa S6-308, al lado de la peluquería Ooh!", "horario": "8:00 AM a 4:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 7, "ciudad": "Quito", "provincia": "Pichincha", "local": "Local Virtus", "direccion": "Redondel para entrar a Miraflores, calle Olmedo y Francisco Flor, pasos arriba del Colegio Cevallos", "horario": "9:00 AM a 7:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 8, "ciudad": "Quito", "provincia": "Pichincha", "local": "Udyat Fitness Club (piscina)", "direccion": "Ave. París N40-108 y De los Granados", "horario": "9:00 AM a 8:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 9, "ciudad": "Quito", "provincia": "Pichincha", "local": "Zona Norte - frente al Chori Gol", "direccion": "Thomas de Berlanga e Isla Santa Fe, frente al Chori Gol de la Thomas de Berlanga", "horario": "9:00 AM a 9:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 10, "ciudad": "Quito", "provincia": "Pichincha", "local": "Edif. Julio Cesar, local #03 - Chillogallo", "direccion": "Av. Rumichaca Ñan y calle Moromoros, sector Chillogallo, frente al Estadio El Aucas (el sur)", "horario": "8:00 AM a 4:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 11, "ciudad": "Sangolquí (Valle de los Chillos)", "provincia": "Pichincha", "local": "Parque Turismo", "direccion": "Parque Turismo, Sangolquí", "horario": "Desde las 10:00 AM", "abierto": true, "necesidades": {} },
-    { "id": 12, "ciudad": "Latacunga", "provincia": "Cotopaxi", "local": "Restaurante Con Sazón de Aquí y de Allá", "direccion": "Av. Eloy Alfaro, al lado de la Cooperativa Transporte Ambato", "horario": "9:00 AM a 9:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 13, "ciudad": "Latacunga", "provincia": "Cotopaxi", "local": "Centro Comercial Galarza", "direccion": "Av. 5 de Junio, en el Centro Comercial Galarza", "horario": "9:00 AM a 8:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 14, "ciudad": "Santo Domingo de los Tsáchilas", "provincia": "Santo Domingo de los Tsáchilas", "local": "Frente al local de Alejandra Osorio Lashista", "direccion": "Calle Manuelita Sáenz o Liberación Popular con calle La Niña, referencia Escuela UNE", "horario": "9:00 AM a 8:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 15, "ciudad": "Santo Domingo de los Tsáchilas", "provincia": "Santo Domingo de los Tsáchilas", "local": "Municipio - al lado del Salón de la Ciudad", "direccion": "Avenida Quito con calle Tsáchila, al lado del Salón de la Ciudad", "horario": "9:00 AM a 8:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 16, "ciudad": "Santo Domingo de los Tsáchilas", "provincia": "Santo Domingo de los Tsáchilas", "local": "Terminal - Centro de Atención al Migrante", "direccion": "Terminal, Centro de Atención al Migrante, entrada por el patio de comida", "horario": "9:00 AM a 8:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 17, "ciudad": "Quevedo", "provincia": "Los Ríos", "local": "Parroquia 7 de Octubre", "direccion": "Parroquia 7 de Octubre, calle 7ma y La B", "horario": "Desde las 8:00 AM", "abierto": true, "necesidades": {} },
-    { "id": 18, "ciudad": "Guayaquil", "provincia": "Guayas", "local": "Arriba de Oro Cash / Queen Dental Centro", "direccion": "Av. Quito y Vélez, edificio 943, arriba de Oro Cash, Queen Dental Centro Guayaquil", "horario": "9:00 AM a 7:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 19, "ciudad": "Machala", "provincia": "El Oro", "local": "Local Agrojecam Sthil", "direccion": "El Guabo, Sucre y Panamericana, local Agrojecam Sthil", "horario": "5:00 PM a 8:00 PM", "abierto": true, "necesidades": {} },
-    { "id": 20, "ciudad": "Ambato", "provincia": "Tungurahua", "local": "Centro de acopio Ambato (referencia La Cumandá)", "direccion": "Av. 12 de Noviembre, negocio TuFastMarket / Redondel de la Cumandá", "horario": "8:00 AM a 8:00 PM", "abierto": true, "necesidades": {} }
+    {
+      "id": 1,
+      "ciudad": "Quito",
+      "local": "Cachapas El Félix",
+      "direccion": "Av. Naciones Unidas con Av. 10 de Agosto, Quito Norte",
+      "horario": "Desde las 11:00 AM",
+      "abierto": true,
+      "maps_url": "https://share.google/LgeoZAa5TxLPAMoNp",
+      "lat": -0.1807,
+      "lng": -78.4678,
+      "necesidades": {}
+    },
+    {
+      "id": 2,
+      "ciudad": "Quito",
+      "local": "Panadería Tío Simón",
+      "direccion": "Carapungo, Av. Luis Vacari con Galo Plaza",
+      "horario": "11:00 AM a 8:00 PM",
+      "abierto": true,
+      "maps_url": "https://maps.app.goo.gl/Skfkm9z9k2h7Tyrn7",
+      "lat": -0.1807,
+      "lng": -78.4678,
+      "necesidades": {}
+    },
+    {
+      "id": 3,
+      "ciudad": "Quito",
+      "local": "Casa Comunal La Comarca",
+      "direccion": "Quitumbe, Ninallacta",
+      "horario": "24 horas",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -0.1807,
+      "lng": -78.4678,
+      "necesidades": {}
+    },
+    {
+      "id": 4,
+      "ciudad": "Quito",
+      "local": "Punto Thomas de Berlanga (frente al Chori Gol)",
+      "direccion": "Norte, Thomas de Berlanga e Isla Santa Fe, frente al Chori Gol",
+      "horario": "9:00 AM a 9:00 PM",
+      "abierto": true,
+      "maps_url": "https://maps.app.goo.gl/Jb91CJwJApvSujdF7",
+      "lat": -0.1807,
+      "lng": -78.4678,
+      "necesidades": {}
+    },
+    {
+      "id": 5,
+      "ciudad": "Quito",
+      "local": "Restaurante Don Lucho",
+      "direccion": "Av. Rumichaca, frente al estadio",
+      "horario": "8:00 AM a 5:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -0.1807,
+      "lng": -78.4678,
+      "necesidades": {}
+    },
+    {
+      "id": 6,
+      "ciudad": "Quito",
+      "local": "Edif. Julio César Local #03 (Sur)",
+      "direccion": "Sur de Quito, frente al estadio Aucas",
+      "horario": "8:00 AM a 4:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -0.1807,
+      "lng": -78.4678,
+      "necesidades": {}
+    },
+    {
+      "id": 7,
+      "ciudad": "Quito",
+      "local": "Valle de los Chillos - Monumento de Rumiñahui",
+      "direccion": "Sangolquí, Monumento de Rumiñahui",
+      "horario": "Desde las 12:00 PM",
+      "abierto": true,
+      "maps_url": "https://share.google/7h6McSFjAC1BKlgAd",
+      "lat": -0.1807,
+      "lng": -78.4678,
+      "necesidades": {}
+    },
+    {
+      "id": 8,
+      "ciudad": "Guayaquil",
+      "local": "Local Chamos Burger",
+      "direccion": "Víctor Emilio Estrada y Jiguas, diagonal al Novagym Urdesa",
+      "horario": "Desde las 10:00 AM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -2.1894,
+      "lng": -79.8891,
+      "necesidades": {}
+    },
+    {
+      "id": 9,
+      "ciudad": "Guayaquil",
+      "local": "Universidad de las Artes - Consejo Estudiantil",
+      "direccion": "Universidad de las Artes, Consejo Estudiantil",
+      "horario": "3:00 PM a 5:00 PM",
+      "abierto": true,
+      "maps_url": "https://share.google/uEcxoMwMQleMN3z6E",
+      "lat": -2.1894,
+      "lng": -79.8891,
+      "necesidades": {}
+    },
+    {
+      "id": 10,
+      "ciudad": "Guayaquil",
+      "local": "Arriba de Oro Cash",
+      "direccion": "Av. Quito y Vélez, edificio 943, centro de Guayaquil",
+      "horario": "9:00 AM a 7:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -2.1894,
+      "lng": -79.8891,
+      "necesidades": {}
+    },
+    {
+      "id": 11,
+      "ciudad": "Cuenca",
+      "local": "Edificio Portal del Sol",
+      "direccion": "Av. 12 de Octubre con calle Emilio Carrere, sector Yanuncay",
+      "horario": "8:00 AM a 8:00 PM",
+      "abierto": true,
+      "maps_url": "https://share.google/4ZhDIEnsYhBlchoB4",
+      "lat": -2.9006,
+      "lng": -79.0045,
+      "necesidades": {}
+    },
+    {
+      "id": 12,
+      "ciudad": "Ibarra",
+      "local": "Punto García Moreno",
+      "direccion": "Calle García Moreno 2-58 y Maldonado, a media cuadra del Subcentro de Salud N°1",
+      "horario": "Desde las 9:00 AM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": 0.3517,
+      "lng": -78.1223,
+      "necesidades": {}
+    },
+    {
+      "id": 13,
+      "ciudad": "Ambato",
+      "local": "Pizza House",
+      "direccion": "Av. Shyris y Rumiñahui, Pizza House",
+      "horario": "9:00 AM a 10:00 PM",
+      "abierto": true,
+      "maps_url": "https://share.google/nh5iYroyI5SXjODvM",
+      "lat": -1.2417,
+      "lng": -78.6197,
+      "necesidades": {}
+    },
+    {
+      "id": 14,
+      "ciudad": "Ambato",
+      "local": "TuFastMarket",
+      "direccion": "Av. 12 de Noviembre, negocio TuFastMarket / Redondel de la Cumandá",
+      "horario": "8:00 AM a 8:00 PM",
+      "abierto": true,
+      "maps_url": "https://maps.app.goo.gl/KXSPaHUF1MxhLGmg7",
+      "lat": -1.2417,
+      "lng": -78.6197,
+      "necesidades": {}
+    },
+    {
+      "id": 15,
+      "ciudad": "Latacunga",
+      "local": "Restaurante Con Sazón de Aquí y de Allá",
+      "direccion": "Av. Eloy Alfaro, al lado de la Cooperativa Transporte Ambato",
+      "horario": "9:00 AM a 9:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -0.9333,
+      "lng": -78.6167,
+      "necesidades": {}
+    },
+    {
+      "id": 16,
+      "ciudad": "Latacunga",
+      "local": "Centro Comercial Galarza",
+      "direccion": "Av. 5 de Junio, Centro Comercial Galarza",
+      "horario": "9:00 AM a 8:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -0.9333,
+      "lng": -78.6167,
+      "necesidades": {}
+    },
+    {
+      "id": 17,
+      "ciudad": "Babahoyo",
+      "local": "Restaurant Sazón Yaritagüeños",
+      "direccion": "Calles Custodio Sánchez y Barreiro",
+      "horario": "7:00 AM a 5:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -1.8019,
+      "lng": -79.5346,
+      "necesidades": {}
+    },
+    {
+      "id": 18,
+      "ciudad": "Babahoyo",
+      "local": "Ciudadela El Chofer",
+      "direccion": "Calle principal entre depósito Dimispro y Spa Voluntad de Dios",
+      "horario": "8:00 AM a 6:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -1.8019,
+      "lng": -79.5346,
+      "necesidades": {}
+    },
+    {
+      "id": 19,
+      "ciudad": "Santo Domingo de los Tsáchilas",
+      "local": "Municipio - Salón de la Ciudad",
+      "direccion": "Av. Quito con calle Tsáchila, al lado del Salón de la Ciudad",
+      "horario": "9:00 AM a 8:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -0.2542,
+      "lng": -79.1719,
+      "necesidades": {}
+    },
+    {
+      "id": 20,
+      "ciudad": "Baños de Agua Santa",
+      "local": "Restaurante Cinco Ocho Fast Food",
+      "direccion": "Pedro Vicente Maldonado, Baños de Agua Santa",
+      "horario": "9:00 AM a 8:00 PM",
+      "abierto": true,
+      "maps_url": "https://maps.app.goo.gl/C2TLGwBidWFDauwe9",
+      "lat": -1.3964,
+      "lng": -78.4247,
+      "necesidades": {}
+    },
+    {
+      "id": 21,
+      "ciudad": "Machala",
+      "local": "Local Agrojecam Sthil",
+      "direccion": "El Guabo, Sucre y Panamericana, local Agrojecam Sthil",
+      "horario": "5:00 PM a 8:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -3.2581,
+      "lng": -79.9606,
+      "necesidades": {}
+    },
+    {
+      "id": 22,
+      "ciudad": "La Aurora",
+      "local": "Punto 17 de Octubre",
+      "direccion": "Calle 17 de Octubre y Enrique Gil Gilbert, al lado de la lubricadora El Toreto",
+      "horario": "1:00 PM a 11:00 PM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -2.1167,
+      "lng": -79.9,
+      "necesidades": {}
+    },
+    {
+      "id": 23,
+      "ciudad": "Quevedo",
+      "local": "Parroquia 7 de Octubre",
+      "direccion": "Parroquia 7 de Octubre, calle 7ma y La B",
+      "horario": "Desde las 8:00 AM",
+      "abierto": true,
+      "maps_url": null,
+      "lat": -1.0286,
+      "lng": -79.4636,
+      "necesidades": {}
+    }
   ]
 }
