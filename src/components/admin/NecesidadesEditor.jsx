@@ -2,10 +2,11 @@ const ESTADOS = [
   { value: 'urgente', label: 'URGENTE', bg: '#FEE8EB', color: '#E8112D' },
   { value: 'necesita', label: 'Se necesita', bg: '#EBF4FD', color: '#1F6FC4' },
   { value: 'no_necesita', label: 'Ya no necesita', bg: '#E9EEF3', color: '#8A98AB' },
+  { value: 'oculto', label: 'Ocultar', bg: '#F4F9FE', color: '#C0C8D4' },
 ]
 
 export default function NecesidadesEditor({ categorias, necesidades, onChange }) {
-  const getEstado = (catId) => necesidades?.[catId] || 'necesita'
+  const getEstado = (catId) => necesidades?.[catId] || 'oculto'
 
   const setEstado = (catId, valor) => {
     onChange({ ...necesidades, [catId]: valor })

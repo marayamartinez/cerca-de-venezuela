@@ -44,7 +44,7 @@ export default function CentroCard({ centro, categorias, mostrarNecesidades }) {
         `${centro.direccion}, ${centro.ciudad}, Ecuador`
       )}`
 
-  const getEstado = (catId) => centro.necesidades?.[catId] || 'necesita'
+  const getEstado = (catId) => centro.necesidades?.[catId] || 'oculto'
 
   return (
     <article
@@ -92,7 +92,7 @@ export default function CentroCard({ centro, categorias, mostrarNecesidades }) {
             Qué necesita ahora
           </p>
           <div className="flex flex-wrap gap-2">
-            {categorias.map((cat) => (
+            {categorias.filter((cat) => getEstado(cat.id) !== 'oculto').map((cat) => (
               <NecesidadPill
                 key={cat.id}
                 estado={getEstado(cat.id)}
