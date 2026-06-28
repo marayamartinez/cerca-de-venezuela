@@ -85,8 +85,8 @@ export default function CentroCard({ centro, categorias, mostrarNecesidades }) {
         </div>
       </div>
 
-      {/* Necesidades — solo si mostrarNecesidades es true */}
-      {mostrarNecesidades && (
+      {/* Necesidades — solo si hay categorías visibles */}
+      {mostrarNecesidades && categorias.some((cat) => getEstado(cat.id) !== 'oculto') && (
         <div className="p-5 flex-1">
           <p className="text-[#5A6B85] text-xs font-semibold uppercase tracking-wide mb-3">
             Qué necesita ahora
