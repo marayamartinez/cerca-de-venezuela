@@ -1,9 +1,47 @@
 import { supabase } from './supabaseClient'
-import data from '../data/centros.json'
 
-// Las categorías de necesidad (alimentos, agua, etc.) siguen en el JSON —
-// son un esquema fijo que el admin gestiona por centro, no una tabla propia.
-export const getCategorias = () => Promise.resolve(data.categorias)
+// ── Categorías de necesidad (ahora en Supabase) ───────────────────────────
+
+export const getCategorias = async () => {
+  const { data, error } = await supabase
+    .from('categorias_necesidad')
+    .select('*')
+    .order('orden')
+  if (error) throw error
+  // Mantenemos id=slug para compatibilidad con el campo necesidades de cada centro
+  return data.map((c) => ({ id: c.slug, label: c.label, _dbId: c.id }))
+}
+
+const slugify = (texto) =>
+  texto.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')
+
+export const createCategoriaNecesidad = async (label) => {
+  const slug = slugify(label) + '_' + Date.now()
+  const { data, error } = await supabase
+    .from('categorias_necesidad')
+    .insert({ slug, label, orden: 999 })
+    .select()
+    .single()
+  if (error) throw error
+  return { id: data.slug, label: data.label, _dbId: data.id }
+}
+
+export const updateCategoriaNecesidad = async (dbId, label) => {
+  const { error } = await supabase
+    .from('categorias_necesidad')
+    .update({ label })
+    .eq('id', dbId)
+  if (error) throw error
+}
+
+export const deleteCategoriaNecesidad = async (dbId) => {
+  const { error } = await supabase
+    .from('categorias_necesidad')
+    .delete()
+    .eq('id', dbId)
+  if (error) throw error
+}
 
 // ── Config ────────────────────────────────────────────────────────────────
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Heart, LogOut, Settings } from 'lucide-react'
 import CentrosTab from './CentrosTab'
 import DonarTab from './DonarTab'
+import CategoriasNecesidadEditor from './CategoriasNecesidadEditor'
 import { getCategorias, getConfig, setConfig } from '../../services/dataService'
 
 const TABS = [
@@ -26,6 +27,12 @@ function ConfigTab() {
 
   return (
     <div className="flex flex-col gap-4">
+      <div className="bg-white rounded-2xl border border-[#E6EEF6] p-4">
+        <p className="text-xs font-bold text-[#5A6B85] uppercase tracking-wide mb-2">Etiquetas de necesidad</p>
+        <p className="text-xs text-[#8A98AB] mb-3">Las etiquetas que aparecen en cada centro (alimentos, ropa, etc.). Puedes agregar, renombrar o eliminarlas.</p>
+        <CategoriasNecesidadEditor />
+      </div>
+
       <div className="bg-white rounded-2xl border border-[#E6EEF6] p-4">
         <p className="text-xs font-bold text-[#5A6B85] uppercase tracking-wide mb-2">Texto del banner</p>
         <p className="text-xs text-[#8A98AB] mb-3">Aparece en la franja azul arriba de la página pública.</p>
