@@ -16,11 +16,13 @@ const VACIO = {
 
 export default function CentroForm({ centro, categorias, mostrarNecesidades, onClose, onSaved }) {
   const esNuevo = !centro
+  const ciudadEsConocida = centro && CIUDADES.includes(centro.ciudad)
   const [form, setForm] = useState(
     centro
       ? { ...centro, maps_url: centro.maps_url || '', necesidades: centro.necesidades || {} }
       : VACIO
   )
+  const [otraCiudad, setOtraCiudad] = useState(false)
   const [guardando, setGuardando] = useState(false)
   const [error, setError] = useState('')
 
@@ -74,22 +76,41 @@ export default function CentroForm({ centro, categorias, mostrarNecesidades, onC
           {/* Ciudad */}
           <div>
             <label className="block text-xs font-semibold text-[#5A6B85] mb-1.5 uppercase tracking-wide">Ciudad *</label>
-            <select
-              value={form.ciudad}
-              onChange={(e) => set('ciudad', e.target.value)}
-              className="w-full border border-[#E6EEF6] rounded-xl px-4 py-3 text-[#0B335E] text-sm focus:outline-none focus:ring-2 focus:ring-[#5FB0F5]"
-            >
-              <option value="">Selecciona ciudad…</option>
-              {CIUDADES.map((c) => <option key={c} value={c}>{c}</option>)}
-              <option value="__otra">Otra ciudad…</option>
-            </select>
-            {form.ciudad === '__otra' && (
-              <input
-                type="text"
-                placeholder="Escribe el nombre de la ciudad"
-                className="mt-2 w-full border border-[#E6EEF6] rounded-xl px-4 py-3 text-[#0B335E] text-sm focus:outline-none focus:ring-2 focus:ring-[#5FB0F5]"
-                onChange={(e) => set('ciudad', e.target.value)}
-              />
+            {!otraCiudad ? (
+              <select
+                value={CIUDADES.includes(form.ciudad) ? form.ciudad : ''}
+                onChange={(e) => {
+                  if (e.target.value === '__otra') {
+                    setOtraCiudad(true)
+                    set('ciudad', '')
+                  } else {
+                    set('ciudad', e.target.value)
+                  }
+                }}
+                className="w-full border border-[#E6EEF6] rounded-xl px-4 py-3 text-[#0B335E] text-sm focus:outline-none focus:ring-2 focus:ring-[#5FB0F5]"
+              >
+                <option value="">Selecciona ciudad…</option>
+                {CIUDADES.map((c) => <option key={c} value={c}>{c}</option>)}
+                <option value="__otra">Otra ciudad…</option>
+              </select>
+            ) : (
+              <div className="flex gap-2">
+                <input
+                  autoFocus
+                  type="text"
+                  value={form.ciudad}
+                  placeholder="Escribe el nombre de la ciudad"
+                  className="flex-1 border border-[#5FB0F5] rounded-xl px-4 py-3 text-[#0B335E] text-sm focus:outline-none focus:ring-2 focus:ring-[#5FB0F5]"
+                  onChange={(e) => set('ciudad', e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={() => { setOtraCiudad(false); set('ciudad', '') }}
+                  className="px-3 py-2 rounded-xl border border-[#E6EEF6] text-[#8A98AB] text-sm hover:bg-[#F4F9FE]"
+                >
+                  Cancelar
+                </button>
+              </div>
             )}
           </div>
 
