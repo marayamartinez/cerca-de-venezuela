@@ -61,6 +61,7 @@ export default function CategoriasNecesidadEditor() {
   const [cargando, setCargando] = useState(true)
   const [nuevaLabel, setNuevaLabel] = useState('')
   const [agregando, setAgregando] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const cargar = useCallback(async () => {
     setCargando(true)
@@ -74,10 +75,15 @@ export default function CategoriasNecesidadEditor() {
   const handleAdd = async (e) => {
     e.preventDefault()
     if (!nuevaLabel.trim()) return
-    const created = await createCategoriaNecesidad(nuevaLabel.trim())
-    setCategorias((prev) => [...prev, created])
-    setNuevaLabel('')
-    setAgregando(false)
+    setErrorMsg('')
+    try {
+      const created = await createCategoriaNecesidad(nuevaLabel.trim())
+      setCategorias((prev) => [...prev, created])
+      setNuevaLabel('')
+      setAgregando(false)
+    } catch (err) {
+      setErrorMsg('Error al guardar: ' + err.message)
+    }
   }
 
   const handleUpdated = (dbId, label) => {
@@ -103,23 +109,28 @@ export default function CategoriasNecesidadEditor() {
       ))}
 
       {agregando ? (
-        <form onSubmit={handleAdd} className="flex gap-2">
-          <input
-            autoFocus
-            value={nuevaLabel}
-            onChange={(e) => setNuevaLabel(e.target.value)}
-            placeholder="Nombre de la etiqueta…"
-            className="flex-1 border border-[#5FB0F5] rounded-xl px-4 py-2.5 text-sm text-[#0B335E] focus:outline-none"
-          />
-          <button type="submit" className="px-4 py-2 rounded-xl bg-[#DEF5EB] text-[#0F9D63] font-semibold text-sm">
-            Agregar
-          </button>
-          <button type="button" onClick={() => setAgregando(false)} className="px-3 py-2 rounded-xl hover:bg-[#F4F9FE] text-[#8A98AB] text-sm">
-            Cancelar
-          </button>
+        <form onSubmit={handleAdd} className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            <input
+              autoFocus
+              value={nuevaLabel}
+              onChange={(e) => { setNuevaLabel(e.target.value); setErrorMsg('') }}
+              onKeyDown={(e) => { if (e.key === 'Escape') { setAgregando(false); setErrorMsg('') } }}
+              placeholder="Nombre de la etiqueta…"
+              className="flex-1 border border-[#5FB0F5] rounded-xl px-4 py-2.5 text-sm text-[#0B335E] focus:outline-none"
+            />
+            <button type="submit" className="px-4 py-2 rounded-xl bg-[#DEF5EB] text-[#0F9D63] font-semibold text-sm">
+              Agregar
+            </button>
+            <button type="button" onClick={() => { setAgregando(false); setErrorMsg('') }} className="px-3 py-2 rounded-xl hover:bg-[#F4F9FE] text-[#8A98AB] text-sm">
+              Cancelar
+            </button>
+          </div>
+          {errorMsg && <p className="text-xs text-[#E8112D]">{errorMsg}</p>}
         </form>
       ) : (
         <button
+          type="button"
           onClick={() => setAgregando(true)}
           className="flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-[#C8DFF7] text-[#2E8BE0] font-semibold text-sm hover:bg-[#EBF4FD] transition-colors"
         >
